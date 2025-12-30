@@ -43,16 +43,15 @@
     }
 
     .hero h1 {
-      font-size: 60px;
-      margin-bottom: 20px;
+      font-size: 48px;
+      margin-bottom: 10px;
     }
 
     .hero p {
       color: #bdbdbd;
-      max-width: 600px;
-      margin: auto;
     }
 
+    /* PRODUCT */
     .product {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -66,30 +65,33 @@
       border-radius: 12px;
     }
 
-    .product-details h2 {
+    /* TITLES */
+    .desktop-title {
       font-size: 32px;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
-    .product-details p {
-      color: #bdbdbd;
+    .mobile-title {
+      display: none;
+      font-size: 35px;
+      text-align: center;
       margin-bottom: 25px;
-      line-height: 1.6;
     }
 
     .price {
       font-size: 22px;
-      margin-bottom: 15px;
+      margin-bottom: 30px;
     }
 
+    /* COLORS */
     .product-colors {
-      margin-bottom: 10px;
+      margin-bottom: 35px;
     }
 
     .product-colors p {
       font-size: 14px;
       color: #bdbdbd;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .product-colors button {
@@ -99,6 +101,11 @@
       border: 2px solid #444;
       margin-right: 10px;
       cursor: pointer;
+      transition: transform 0.2s, border 0.2s;
+    }
+
+    .product-colors button:hover {
+      transform: scale(1.1);
     }
 
     .product-colors button.active {
@@ -112,13 +119,18 @@
     .green { background: #35694E; }
     .pink { background: #ff6fae; }
 
+    /* DELIVERY */
+    .delivery-info {
+      margin-top: 20px;
+    }
+
     .delivery-info p {
       font-size: 14px;
       color: #bdbdbd;
-      margin-top: 10px;
       display: flex;
       align-items: center;
       gap: 8px;
+      margin-bottom: 12px;
     }
 
     .delivery-info img {
@@ -126,6 +138,7 @@
       height: 24px;
     }
 
+    /* FORM */
     .form {
       background: #121212;
       padding: 40px;
@@ -156,10 +169,10 @@
       padding: 14px;
       background: white;
       color: black;
-      border: none;
       border-radius: 8px;
       font-weight: 600;
       cursor: pointer;
+      border: none;
     }
 
     footer {
@@ -169,14 +182,19 @@
       margin-top: 80px;
     }
 
+    /* MOBILE */
     @media (max-width: 768px) {
       .product {
         grid-template-columns: 1fr;
         text-align: center;
       }
 
-      .hero h1 {
-        font-size: 36px;
+      .mobile-title {
+        display: block;
+      }
+
+      .desktop-title {
+        display: none;
       }
     }
   </style>
@@ -192,22 +210,26 @@
   </header>
 
   <section class="hero">
-    <h1>Pre-order list, Drop 101, JOSKA™.</h1>
-    <p>The site will disappear on 02/02/2026 at 18:36.</p>
+    <h1>JOSKA™</h1>
+    <p>Pre-order list — Drop 101</p>
   </section>
 
   <section class="product">
-    <img id="productImage" src="voltbox (5).png" alt="Product">
+
+    <!-- MOBILE TITLE -->
+    <h2 class="mobile-title">Lost In Gravity</h2>
+   
+
+    <img id="productImage" src="LIG 2 (2).jfif" alt="Product">
 
     <div class="product-details">
-      <h2>Lost In Gravity — Oversized Hoodie</h2>
-      <p>Premium fabric. Limited quantity. Designed for those who move with intention.</p>
 
-      <div class="price">MAD 264.99 — Pre-Order</div>
+      <!-- DESKTOP TITLE -->
+      <h2 class="desktop-title">Lost In Gravity — Oversized Hoodie</h2>
 
       <div class="product-colors">
         <p>Available colors</p>
-        <button class="black active" onclick="changeImage('voltbox (5).png', this)"></button>
+        <button class="black active" onclick="changeImage('LIG 2 (2).jfif', this)"></button>
         <button class="white" onclick="changeImage('LIG 2.PNG', this)"></button>
         <button class="gray" onclick="changeImage('LIG 2.PNG', this)"></button>
         <button class="purple" onclick="changeImage('LIG 2 (1).jfif', this)"></button>
@@ -215,28 +237,28 @@
         <button class="pink" onclick="changeImage('LIG 2 (3).jfif', this)"></button>
       </div>
 
+      <div class="price">MAD 264.99 — Pre-Order</div>
+
       <div class="delivery-info">
         <p><img src="delivery-truck.png"> Free delivery</p>
         <p><img src="cash-on-delivery.png"> Cash on delivery available</p>
         <p><img src="fast-delivery.png"> Delivery in 1–3 days</p>
       </div>
+
     </div>
   </section>
 
-  <!-- ✅ FORM WITH FORMSPREE -->
+  <!-- FORMSPREE FORM -->
   <section class="form">
     <h3>Pre-Order Now</h3>
 
     <form action="https://formspree.io/f/mlgezwrr" method="POST">
-
       <input type="hidden" name="_subject" value="New JOSKA Pre-Order">
-      <input type="hidden" name="_captcha" value="false">
 
       <input type="text" name="name" placeholder="Full Name" required>
       <input type="tel" name="phone" placeholder="Phone Number" required>
       <input type="email" name="email" placeholder="Email Address" required>
       <input type="text" name="location" placeholder="Location" required>
-      <input type="text" name="postal_code" placeholder="Postal Code" required>
 
       <select name="size" required>
         <option value="">Select Size</option>
@@ -269,7 +291,8 @@
 <script>
   function changeImage(image, button) {
     document.getElementById("productImage").src = image;
-    document.querySelectorAll(".product-colors button").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".product-colors button")
+      .forEach(b => b.classList.remove("active"));
     button.classList.add("active");
   }
 </script>
