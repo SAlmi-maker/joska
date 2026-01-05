@@ -2,442 +2,232 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pre-Order | JOSKA™</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Limited Drop</title>
 
   <style>
-    :root {
-      --bg:        #0b0b0b;
-      --text:      #ffffff;
-      --text-dim:  #bdbdbd;
-      --surface:   #121212;
-      --input-bg:  #1c1c1c;
-      
-      --space-xs:  clamp(0.75rem, 3vw, 1rem);
-      --space-sm:  clamp(1rem, 4vw, 1.5rem);
-      --space-md:  clamp(2rem, 6vw, 4rem);
-      --font-body: clamp(1rem, 3vw, 1.125rem);
-    }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      font-family: "Helvetica Neue", Arial, sans-serif;
     }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', system-ui, sans-serif;
-      font-size: var(--font-body);
-      line-height: 1.6;
       min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* ── Hero ── */
-    .hero {
-      height: 100vh;
-      min-height: 480px;
+      background: #000;
       display: flex;
       flex-direction: column;
+      align-items: center;
       justify-content: center;
-      align-items: center;
+      color: #fff;
+      padding: 24px;
       text-align: center;
-      padding: var(--space-sm);
-      position: relative;
     }
 
-    /* Group all disappearing elements */
-    .hero-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: clamp(1.5rem, 5vw, 3rem);
-      transition: 
-        opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
-    }
-
-    .hero-content.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .hero-content.hidden {
-      opacity: 0;
-      transform: translateY(-80px);
-      pointer-events: none;
-    }
-
+    /* LOGO */
     .logo img {
-      width: clamp(120px, 35vw, 180px);
-      height: auto;
-    }
-
-    .brand {
-      position: relative;
-      display: inline-block;
-    }
-
-    .brand-name {
-      font-size: clamp(3.8rem, 13vw, 7.5rem);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 0.95;
-    }
-
-    .trademark {
-      position: absolute;
-      top: -0.05em;
-      right: -0.9em;
-      font-size: clamp(1.8rem, 6vw, 3.2rem);
-      font-weight: 400;
-      color: var(--text-dim);
+      max-width: 140px;
+      margin-bottom: 28px;
       opacity: 0.9;
-      transform: scale(1.1, 1.3);
     }
 
-    .tagline {
-      color: var(--text-dim);
-      font-size: clamp(1.25rem, 4.5vw, 1.6rem);
-      max-width: 30ch;
+    /* HEADERS */
+    .badge {
+      font-size: 12px;
+      letter-spacing: 2px;
+      font-weight: 600;
+      color: #aaa;
+      margin-bottom: 12px;
     }
 
-    .scroll-prompt {
-      color: var(--text-dim);
-      font-size: 0.95rem;
-      font-weight: 300;
-      letter-spacing: 0.04em;
-      margin-top: 1.5rem;
-      opacity: 0.85;
-      transition: opacity 1.2s ease;
+    .subtitle {
+      font-size: 26px;
+      letter-spacing: 3px;
+      font-weight: 600;
+      margin-bottom: 12px;
     }
 
-    .scroll-prompt.visible {
-      animation: soft-pulse 4.2s ease-in-out infinite;
+    p {
+      font-size: 15px;
+      color: #aaa;
+      margin-bottom: 32px;
+      line-height: 1.6;
     }
 
-    @keyframes soft-pulse {
-      0%, 100% { opacity: 0.6;  transform: translateY(0); }
-      50%      { opacity: 0.95; transform: translateY(-5px); }
-    }
-
-    /* ── Main Content ── */
-    .container {
-      padding: var(--space-md) var(--space-sm);
-      max-width: 1100px;
-      margin-inline: auto;
-    }
-
-    .product-grid {
-      display: grid;
-      gap: clamp(2.5rem, 7vw, 4rem);
-      margin-block-end: clamp(4rem, 10vw, 7rem);
-    }
-
-    .product-image {
+    /* OPTIONS CONTAINER */
+    .options {
       width: 100%;
-      aspect-ratio: 3 / 4;
-      object-fit: cover;
-      border-radius: 12px;
+      max-width: 420px;
+      text-align: left;
+      margin-bottom: 32px;
     }
 
-    .product-info {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-sm);
-    }
-
-    .title-mobile {
-      font-size: clamp(2.2rem, 6vw, 2.8rem);
-      text-align: center;
-      margin-block-end: 1em;
-    }
-
-    .title-desktop {
-      font-size: clamp(2.2rem, 5vw, 3rem);
-      margin-block-end: 0.6em;
+    .option-title {
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: #aaa;
+      margin-bottom: 10px;
+      text-transform: uppercase;
     }
 
     .price {
-      font-size: clamp(1.4rem, 4.5vw, 1.8rem);
+      font-size: 22px;
       font-weight: 600;
+      margin-bottom: 20px;
     }
 
-    .color-section {
-      margin: 1.5em 0 2em;
-    }
-
-    .color-section p {
-      color: var(--text-dim);
-      margin-block-end: 1em;
-    }
-
-    .color-swatches {
+    .colors,
+    .sizes,
+    .delivery {
       display: flex;
+      gap: 10px;
+      margin-bottom: 26px;
       flex-wrap: wrap;
-      gap: 14px;
-      justify-content: center;
     }
 
-    .swatch {
-      width: 48px;
-      height: 48px;
+    /* COLORS */
+    .color {
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
-      border: 2px solid #444;
+      border: 1px solid #fff;
       cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .swatch:hover,
-    .swatch:focus-visible {
-      transform: scale(1.18);
-    }
-
-    .swatch.active {
-      border-color: white;
-      box-shadow: 0 0 0 4px rgba(255,255,255,0.15);
     }
 
     .black  { background: #000; }
-    .white  { background: #fff; border-color: #aaa; }
+    .white  { background: #fff; }
     .gray   { background: #7A869B; }
     .purple { background: #3F386F; }
     .green  { background: #35694E; }
     .pink   { background: #ff6fae; }
 
-    .delivery-features p {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--text-dim);
-      margin-block-end: 0.9em;
+    /* SIZE & DELIVERY */
+    .size,
+    .delivery-option {
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,0.3);
+      font-size: 12px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
     }
 
-    .delivery-features img {
-      width: 28px;
-      height: 28px;
-      flex-shrink: 0;
+    .size:hover,
+    .delivery-option:hover {
+      background: #fff;
+      color: #000;
     }
 
-    .preorder-form {
-      background: var(--surface);
-      padding: clamp(2rem, 6vw, 3.5rem);
-      border-radius: 16px;
-      max-width: 540px;
+    /* FORM */
+    form {
+      width: 100%;
+      max-width: 420px;
       margin: 0 auto;
     }
 
-    .preorder-form h3 {
-      text-align: center;
-      margin-block-end: 2.2em;
-      font-size: clamp(1.6rem, 4.5vw, 2rem);
-    }
-
-    .preorder-form input,
-    .preorder-form select {
+    input {
       width: 100%;
-      padding: 1.1rem 1.3rem;
-      margin-block-end: 1.2rem;
-      border: none;
-      border-radius: 10px;
-      background: var(--input-bg);
-      color: white;
-      font-size: 1rem;
+      padding: 16px;
+      font-size: 15px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      background: transparent;
+      color: #fff;
+      margin-bottom: 16px;
+      outline: none;
     }
 
-    .preorder-form input::placeholder {
-      color: #888;
+    input::placeholder {
+      color: #777;
     }
 
-    .preorder-form button {
+    button {
       width: 100%;
-      padding: 1.2rem;
-      background: white;
-      color: black;
+      padding: 16px;
+      background: #fff;
+      color: #000;
       border: none;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 1.1rem;
+      border-radius: 12px;
+      font-size: 14px;
+      letter-spacing: 2px;
       cursor: pointer;
-      transition: background 0.25s ease;
+      transition: opacity 0.2s ease;
     }
 
-    .preorder-form button:hover {
-      background: #e8e8e8;
+    button:hover {
+      opacity: 0.85;
     }
 
-    footer {
-      text-align: center;
+    .note {
+      font-size: 12px;
       color: #666;
-      font-size: 0.9rem;
-      padding: 4rem 0 2rem;
+      margin-top: 16px;
     }
 
-    /* Responsive */
-    @media (min-width: 640px) {
-      .product-grid {
-        grid-template-columns: 1fr 1fr;
-        align-items: center;
-      }
-      .color-swatches {
-        justify-content: flex-start;
-      }
-      .title-mobile {
-        display: none;
-      }
-    }
-
-    @media (min-width: 900px) {
-      .container {
-        padding-inline: 3rem;
-      }
-      .preorder-form {
-        padding: 4rem;
-      }
+    .footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #666;
     }
   </style>
 </head>
 <body>
 
-  <section class="hero">
-    <div class="hero-content visible">
-      <div class="logo">
-        <img src="logo.png" alt="JOSKA Logo">
-      </div>
+  <!-- LOGO -->
+  <div class="logo">
+    <img src="logo.png" alt="Brand Logo">
+  </div>
 
-      <div class="brand">
-        <h1 class="brand-name">JOSKA</h1>
-        <sup class="trademark">™</sup>
-      </div>
+  <div class="badge">LIMITED DROP</div>
+  <div class="subtitle">LOST IN GRAVITY</div>
 
-      <p class="tagline">Pre-order list — Drop 101</p>
+  <p>
+    Premium heavyweight hoodie.  
+    Limited quantity. No restock.
+  </p>
 
-      <div class="scroll-prompt visible">Scroll to discover</div>
+  <!-- OPTIONS -->
+  <div class="options">
+
+    <div class="option-title">PRICE</div>
+    <div class="price">229 MAD</div>
+
+    <div class="option-title">DELIVERY</div>
+    <div class="delivery">
+      <div class="delivery-option">Casablanca (20 MAD)</div>
+      <div class="delivery-option">Other (40 MAD)</div>
     </div>
-  </section>
 
-  <div class="container">
+    <div class="option-title">AVAILABLE COLORS</div>
+    <div class="colors">
+      <div class="color black"></div>
+      <div class="color white"></div>
+      <div class="color gray"></div>
+      <div class="color purple"></div>
+      <div class="color green"></div>
+      <div class="color pink"></div>
+    </div>
 
-    <section class="product-grid">
-      <h2 class="title-mobile">Lost In Gravity</h2>
-      
-      <img 
-        id="productImage" 
-        class="product-image" 
-        src="LIG 2 (2).jfif" 
-        alt="Lost In Gravity Oversized Hoodie"
-      >
-
-      <div class="product-info">
-        <h2 class="title-desktop">Lost In Gravity — Oversized Hoodie</h2>
-
-        <div class="color-section">
-          <p>Available colors</p>
-          <div class="color-swatches">
-            <button class="swatch black active"  data-img="LIG 2 (2).jfif" aria-label="Black"></button>
-            <button class="swatch white"         data-img="LIG 2.PNG"     aria-label="White"></button>
-            <button class="swatch gray"          data-img="LIG 2.PNG"     aria-label="Gray"></button>
-            <button class="swatch purple"        data-img="LIG 2 (1).jfif" aria-label="Purple"></button>
-            <button class="swatch green"         data-img="LIG 2 (2).jfif" aria-label="Green"></button>
-            <button class="swatch pink"          data-img="LIG 2 (3).jfif" aria-label="Pink"></button>
-          </div>
-        </div>
-
-        <div class="price">MAD 264.99 — Pre-Order</div>
-
-        <div class="delivery-features">
-          <p><img src="delivery-truck.png" alt=""> Free delivery</p>
-          <p><img src="cash-on-delivery.png" alt=""> Cash on delivery available</p>
-          <p><img src="fast-delivery.png" alt=""> Delivery within 24 to 48 hours</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="preorder-form">
-      <h3>Pre-Order Now</h3>
-      
-      <form action="https://formspree.io/f/mlgezwrr" method="POST">
-        <input type="hidden" name="_subject" value="New JOSKA Pre-Order">
-
-        <input type="text"     name="name"     placeholder="Full Name"      required>
-        <input type="tel"      name="phone"    placeholder="Phone Number"   required>
-        <input type="email"    name="email"    placeholder="Email Address"  required>
-        <input type="text"     name="location" placeholder="Location"       required>
-
-        <select name="size" required>
-          <option value="" disabled selected>Select Size</option>
-          <option>S</option>
-          <option>M</option>
-          <option>L</option>
-          <option>XL</option>
-        </select>
-
-        <select name="color" required>
-          <option value="" disabled selected>Select Color</option>
-          <option>Black</option>
-          <option>White</option>
-          <option>Gray</option>
-          <option>Purple</option>
-          <option>Green</option>
-          <option>Pink</option>
-        </select>
-
-        <button type="submit">Reserve My Piece</button>
-      </form>
-    </section>
-
-    <footer>
-      © 2026 — All rights reserved, JOSKA™
-    </footer>
+    <div class="option-title">SIZES</div>
+    <div class="sizes">
+      <div class="size">S</div>
+      <div class="size">M</div>
+      <div class="size">L</div>
+      <div class="size">XL</div>
+    </div>
 
   </div>
 
-  <script>
-    // ── Color image switcher ──
-    document.querySelectorAll('.color-swatches .swatch').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.getElementById('productImage').src = btn.dataset.img;
-        document.querySelectorAll('.swatch').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-      });
-    });
+  <!-- FORM -->
+  <form>
+    <input type="text" placeholder="Full Name" required />
+    <input type="email" placeholder="Email Address" required />
+    <button type="submit">NOTIFY ME</button>
+  </form>
 
-    // ── Smooth hide entire hero content ──
-    const heroContent = document.querySelector('.hero-content');
-
-    const updateVisibility = () => {
-      // Start disappearing quite early, finish around 120–150 px
-      if (window.scrollY > 80) {
-        heroContent.classList.remove('visible');
-        heroContent.classList.add('hidden');
-      } else {
-        heroContent.classList.remove('hidden');
-        heroContent.classList.add('visible');
-      }
-    };
-
-    // Use requestAnimationFrame + throttle for smoothness
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateVisibility();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true });
-
-    // Initial check
-    updateVisibility();
-  </script>
+  <div class="note">Early access • No spam</div>
+  <div class="footer">© 2026 All rights reserved</div>
 
 </body>
 </html>
