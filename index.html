@@ -3,296 +3,195 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Limited Drop</title>
-
+  <title>JOSKA — Early Access</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Helvetica Neue", Arial, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
       min-height: 100vh;
-      background: #000;
+      margin: 0;
+      background: #0a0a0a;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: #fff;
-      padding: 24px;
-      text-align: center;
+      padding: 20px 16px;
+      color: white;
     }
 
-    .logo img {
-      max-width: 140px;
-      margin-bottom: 28px;
+    .card {
+      width: 100%;
+      max-width: 560px;
+      padding: 60px 48px;
+      border-radius: 36px;
+      background: rgba(30, 30, 40, 0.18);
+      backdrop-filter: blur(36px) saturate(200%);
+      -webkit-backdrop-filter: blur(36px) saturate(200%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 
+        0 40px 100px rgba(0, 0, 0, 0.7),
+        inset 0 0 80px rgba(255, 255, 255, 0.08),
+        inset -80px -80px 140px -50px rgba(180, 220, 255, 0.20);
+      position: relative;
+      overflow: hidden;
     }
 
-    .badge {
-      font-size: 12px;
-      letter-spacing: 2px;
-      font-weight: 600;
-      color: #aaa;
-      margin-bottom: 12px;
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.18) 0%,
+        rgba(255,255,255,0.06) 40%,
+        transparent 70%
+      );
+      pointer-events: none;
+      border-radius: 36px;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      top: -40%;
+      left: -40%;
+      width: 180%;
+      height: 180%;
+      background: radial-gradient(
+        circle at 25% 25%,
+        rgba(220, 240, 255, 0.22) 0%,
+        transparent 60%
+      );
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -1.4px;
+      color: white;
+      margin-bottom: 20px;
+      text-shadow: 0 6px 24px rgba(0,0,0,0.8);
+      text-align: center;          /* ← no longer centered */
+    }
+
+    .light {
+      font-weight: 300;
+      opacity: 0.84;
     }
 
     .subtitle {
-      font-size: 30px;
-      letter-spacing: 3px;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .product-image {
-      width: 100%;
-      max-width: 420px;
-      margin: 0 auto 32px;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.15);
-    }
-
-    .product-image img {
-      width: 100%;
-      display: block;
-      transition: opacity 0.25s ease;
-    }
-
-    .product-description {
-      max-width: 420px;
-      font-size: 18px;
-      text-align: left;
-      color: #aaa;
-      margin-bottom: 24px;
-    }
-
-    .options {
-      width: 100%;
-      max-width: 420px;
-      text-align: left;
-      margin-bottom: 32px;
-    }
-
-    .option-title {
-      font-size: 12px;
-      letter-spacing: 2px;
-      color: #aaa;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-
-    .price {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-
-    .colors, .sizes, .delivery {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 26px;
-      flex-wrap: wrap;
-    }
-
-    .color {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      border: 1px solid #fff;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .color.active {
-      outline: 2px solid #fff;
-    }
-
-    .black { background: #000; }
-    .white { background: #fff; }
-    .gray { background: #7A869B; }
-    .purple { background: #3F386F; }
-    .green { background: #35694E; }
-    .pink { background: #ff6fae; }
-
-    .size, .delivery-option {
-      padding: 8px 14px;
-      border: 1px solid rgba(255,255,255,0.3);
-      font-size: 12px;
-      letter-spacing: 1px;
-      cursor: pointer;
-      opacity: 0.7;
-      transition: all 0.2s ease;
-    }
-
-    .size.active,
-    .delivery-option.active {
-      background: #fff;
-      color: #000;
-      opacity: 1;
+      font-size: 1.3rem;
+      color: #cccccc;
+      line-height: 1.58;
+      margin-bottom: 56px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
     }
 
     form {
-      width: 100%;
-      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 440px;
+      margin: 0 auto;
     }
 
     input {
       width: 100%;
-      padding: 16px;
-      font-size: 15px;
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 8px;
-      background: transparent;
-      color: #fff;
-      margin-bottom: 16px;
+      padding: 20px 24px;
+      font-size: 1.15rem;
+      background: rgba(40, 40, 50, 0.55);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 18px;
+      color: white;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-color: rgba(255,255,255,0.45);
+      box-shadow: 0 0 0 5px rgba(255,255,255,0.12);
+    }
+
+    input::placeholder {
+      color: #aaa;
     }
 
     button {
-      width: 100%;
-      padding: 16px;
-      background: #fff;
-      color: #000;
+      padding: 20px 36px;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #363636;
+      background: #ffffff;
       border: none;
-      border-radius: 12px;
-      font-size: 14px;
-      letter-spacing: 2px;
+      border-radius: 18px;
       cursor: pointer;
-      transition: background 0.25s ease;
+      transition: all 0.3s ease;
+      margin-top: 12px;
     }
 
-    /* HOVER EFFECT: button turns gray */
     button:hover {
-      background: #ccc;
-      color: #000;
+      background: #eeeeee;
+      transform: translateY(-2px);
     }
 
-    .note {
-      font-size: 12px;
-      color: #666;
-      margin-top: 16px;
+    .privacy {
+      margin-top: 44px;
+      font-size: 0.95rem;
+      color: #999;
+      line-height: 1.6;
+      text-align: center;
     }
 
-    .footer {
-      margin-top: 40px;
-      font-size: 12px;
-      color: #666;
+    @media (max-width: 560px) {
+      .card {
+        padding: 48px 32px;
+      }
+      h1 {
+        font-size: clamp(2.1rem, 7vw, 3.2rem);
+      }
+      .subtitle {
+        font-size: 1.18rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="logo">
-    <img src="logo.png" alt="Brand Logo">
-  </div>
+  <div class="card">
 
-  <div class="badge">LIMITED DROP</div>
-  <div class="subtitle">LOST IN GRAVITY</div>
+    <h1>
+      JOSKA, <span class="light">DROP 101.</span><br>
+    </h1>
 
-  <div class="product-image">
-    <img id="productPhoto" src="LIG 1.png" alt="Limited Hoodie">
-  </div>
-
-  <p class="product-description">
-    Premium heavyweight hoodie. Limited quantity. No restock.
-  </p>
-
-  <div class="options">
-
-    <div class="option-title">PRICE</div>
-    <div class="price">229 MAD</div>
-
-    <div class="option-title">AVAILABLE COLORS</div>
-    <div class="colors">
-      <div class="color black" data-color="Black" data-image="LIG 1.png"></div>
-      <div class="color white" data-color="White" data-image="LIG 2 (2).jfif"></div>
-      <div class="color gray" data-color="Gray" data-image="LIG 2 (1).jfif"></div>
-      <div class="color purple" data-color="Purple" data-image="hoodie-purple.jpg"></div>
-      <div class="color green" data-color="Green" data-image="hoodie-green.jpg"></div>
-      <div class="color pink" data-color="Pink" data-image="hoodie-pink.jpg"></div>
+    <div class="subtitle">
+      Once it's gone, it's gone.
     </div>
 
-    <div class="option-title">SIZES</div>
-    <div class="sizes">
-      <div class="size" data-size="S">S</div>
-      <div class="size" data-size="M">M</div>
-      <div class="size" data-size="L">L</div>
-      <div class="size" data-size="XL">XL</div>
-    </div>
+    <form action="https://formspree.io/f/mlgezwrr" method="POST">
+      <input type="text" name="firstname" placeholder="First name" required autocomplete="given-name">
+      <input type="email" name="email" placeholder="Email" required autocomplete="email">
+      <button type="submit">JOIN THE WAITLIST</button>
+    </form>
 
-    <div class="option-title">DELIVERY</div>
-    <div class="delivery">
-      <div class="delivery-option" data-value="Casablanca (20 MAD)">Casablanca (20 MAD)</div>
-      <div class="delivery-option" data-value="Other cities (40 MAD)">Other (40 MAD)</div>
+    <div class="privacy">
+      © 2026 All rights reserved
     </div>
 
   </div>
-
-  <form action="https://formspree.io/f/mlgezwrr" method="POST">
-
-    <!-- HIDDEN FIELDS -->
-    <input type="hidden" name="Color" id="selectedColor">
-    <input type="hidden" name="Size" id="selectedSize">
-    <input type="hidden" name="Delivery" id="deliveryOption">
-
-    <input type="text" name="Name" placeholder="Full Name" required>
-    <input type="email" name="Email" placeholder="Email Address" required>
-    <input type="text" name="Phone" placeholder="Phone number" required>
-    <input type="text" name="Location" placeholder="Location (City, Neighborhood)" required>
-
-    <button type="submit">CONFIRM PRE-ORDER</button>
-  </form>
-
-  <div class="note">Early access • No spam</div>
-  <div class="footer">© 2026 All rights reserved</div>
-
-  <script>
-    const productPhoto = document.getElementById("productPhoto");
-
-    const selectedColor = document.getElementById("selectedColor");
-    const selectedSize = document.getElementById("selectedSize");
-    const deliveryOption = document.getElementById("deliveryOption");
-
-    document.querySelectorAll(".color").forEach(color => {
-      color.addEventListener("click", () => {
-        document.querySelectorAll(".color").forEach(c => c.classList.remove("active"));
-        color.classList.add("active");
-
-        selectedColor.value = color.dataset.color;
-
-        productPhoto.style.opacity = "0";
-        setTimeout(() => {
-          productPhoto.src = color.dataset.image;
-          productPhoto.style.opacity = "1";
-        }, 150);
-      });
-    });
-
-    document.querySelectorAll(".size").forEach(size => {
-      size.addEventListener("click", () => {
-        document.querySelectorAll(".size").forEach(s => s.classList.remove("active"));
-        size.classList.add("active");
-        selectedSize.value = size.dataset.size;
-      });
-    });
-
-    document.querySelectorAll(".delivery-option").forEach(option => {
-      option.addEventListener("click", () => {
-        document.querySelectorAll(".delivery-option").forEach(o => o.classList.remove("active"));
-        option.classList.add("active");
-        deliveryOption.value = option.dataset.value;
-      });
-    });
-
-    document.querySelector("form").addEventListener("submit", e => {
-      if (!selectedColor.value || !selectedSize.value || !deliveryOption.value) {
-        e.preventDefault();
-        alert("Please select color, size, and delivery option.");
-      }
-    });
-  </script>
 
 </body>
 </html>
-
