@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VDZ0M74JTF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-VDZ0M74JTF');
-</script>
 <head>
-  <link rel="icon" type="image/png" href="favicon.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>JOSKA — Early Access</title>
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
   <style>
     * {
       margin: 0;
@@ -92,7 +86,7 @@
       color: white;
       margin-bottom: 20px;
       text-shadow: 0 6px 24px rgba(0,0,0,0.8);
-      text-align: center;          /* ← no longer centered */
+      text-align: center;
     }
 
     .light {
@@ -150,7 +144,6 @@
       border-radius: 18px;
       cursor: pointer;
       transition: all 0.3s ease;
-      margin-top: 12px;
     }
 
     button:hover {
@@ -159,11 +152,32 @@
     }
 
     .privacy {
-      margin-top: 44px;
+      margin-top: 64px;
+      margin-bottom: 32px;
       font-size: 0.95rem;
       color: #999;
       line-height: 1.6;
       text-align: center;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 0;
+    }
+
+    .social-links a {
+      color: #ffffff;
+      font-size: 2rem;
+      text-decoration: none;
+      opacity: 0.85;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      opacity: 1;
+      transform: translateY(-4px);
     }
 
     @media (max-width: 560px) {
@@ -175,6 +189,16 @@
       }
       .subtitle {
         font-size: 1.18rem;
+      }
+      .privacy {
+        margin-top: 56px;
+        margin-bottom: 28px;
+      }
+      .social-links {
+        gap: 36px;
+      }
+      .social-links a {
+        font-size: 1.8rem;
       }
     }
   </style>
@@ -192,7 +216,7 @@
     </div>
 
     <form action="https://formspree.io/f/mlgezwrr" method="POST">
-      <input type="text" name="fullname" placeholder="Full name" required autocomplete="given-name">
+      <input type="text" name="firstname" placeholder="First name" required autocomplete="given-name">
       <input type="email" name="email" placeholder="Email" required autocomplete="email">
       <button type="submit">JOIN THE WAITLIST</button>
     </form>
@@ -201,11 +225,20 @@
       All INFORMATION IS PROTECTED BY JOSKA™
     </div>
 
+    <!-- Social icons – WhatsApp replaced with Email -->
+    <div class="social-links">
+      <a href="https://www.instagram.com/official.joska?igsh=ZTMwYWdtYTFmOXk0" target="_blank" title="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.tiktok.com/@joska.store?_r=1&_t=ZS-93hiF821WRV" target="_blank" title="TikTok">
+        <i class="fab fa-tiktok"></i>
+      </a>
+      <a href="mailto:contact@joska.store" target="_blank" title="Email us">
+        <i class="far fa-envelope"></i>
+      </a>
+    </div>
+
   </div>
 
 </body>
 </html>
-
-
-
-
